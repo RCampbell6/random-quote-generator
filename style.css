@@ -1,0 +1,71 @@
+html {
+  height: 100%;
+}
+
+body {
+  background: url("https://dl.dropboxusercontent.com/s/83hnadg6a5by2px/the-sea.jpg?dl=0") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: white;
+  font-family: 'Amatic SC', cursive;
+  font-size: 8vmin;
+  font-weight: bold;
+  height: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 20vh;
+}
+
+.fill {
+  height: 100%;
+}
+
+#text {
+  min-height: 80%;
+  padding-bottom: 20px;
+}
+
+.quote,
+.author {
+  opacity: 0;
+}
+
+#quote-author {
+  font-weight: normal;
+  font-size: 6vmin;
+  margin: 5px 25px 15px 0;
+  text-transform: uppercase;
+}
+
+.button-custom {
+  background-color: Transparent;
+  border-color: #FFF;
+  color: #FFF;
+  font-size: 5vh;
+  font-family: 'Arial';
+  outline: 0;
+  transition: all 0.1s ease-in-out;
+}
+
+#btn-override .button-custom:focus {
+  background-color: Transparent;
+  border-color: #FFF;
+  color: #FFF;
+  outline: 0;
+}
+
+#btn-override .button-custom:hover {
+  background-color: Transparent;
+  border-color: #FFF;
+  color: #FFF;
+}
+
+#btn-override .button-custom:active {
+  opacity: 0.8;
+}
+
+#btn-override a {
+  margin-bottom: 20px;
+}
