@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Random Quote Generator</title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet"> 
+</head>
+<body class="background-day">
+	<div class="container text-center fill">
+	  <div id="text">
+	    <div class="row">
+	      <div class="col-sm-1 col-lg-2"></div>
+	      <div class="col-sm-10 col-lg-8">
+	        <div class="quote text-justify"><span id="quote-text"> </span></div>
+	        <div class="author text-right"><span id="quote-author"></span></div>
+	      </div>
+	      <div class="col-sm-1 col-lg-2"></div>
+	    </div>
+	  </div>
+	  <div id="btn-override">
+	    <a id="quote-button" class="button-custom btn btn-default btn-lg">NEW QUOTE</a>
+	    <a id="twitter-button" class="button-custom btn btn-default btn-lg" href="" target='_blank'><i class="fa fa-fw fa-twitter"></i></a>
+	  </div>
+	</div>	
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function() {
+  		var quote = {};
+ 			var twitterURL = "https://twitter.com/intent/tweet?hashtags=quotes&text=\"";
+
+		  //Fetch and display original quote.
+		  getQuote(function(result) {
+		    $(".quote").animate({
+		      opacity: 1
+		    }, 800);
+		    $(".author").delay(400).animate({
+		      opacity: 1
+		    }, 400);
+		    $("#quote-text").html(result.quoteText.trim());
+		    $("#quote-author").html(result.quoteAuthor);    
+		    $("#twitter-button").attr("href", twitterURL + encodeURIComponent(result.quoteText.trim() + "\" " + result.quoteAuthor));
+		  })
+
+		  //Fetch and hold prepared next quote for quicker(?) display on click.
+		  getQuote(function(result) {
+		    quote = result;
+		  })
+
+		  $("#quote-button").on("click", function() {
+		    //Change html using stored quote.
+		    $(".quote").animate({
+		      opacity: 0
+		    }, 800, function() {
+		      $("#quote-text").html(quote.quoteText.trim());
+		      $(this).animate({
+		        opacity: 1
+		      }, 800);
+		      $("#quote-author").html(quote.quoteAuthor);       
+		    });
+		    $(".author").animate({
+		      opacity: 0
+		    }, 800, function() {
+		      $(".author").delay(400).animate({
+		        opacity: 1
+		      }, 400);      
+		    });
+		    $("#twitter-button").attr("href", twitterURL + encodeURIComponent(quote.quoteText.trim() + "\" " + quote.quoteAuthor));
+		    //Fetch new quote in preparation.
+		    getQuote(function(result) {
+		      quote = result;
+		    });    
+		  });
+		});
+
+		function getQuote(callback) {
+		  $.ajax({
+		    url: "https://crossorigin.me/http://api.forismatic.com/api/1.0/?method=getQuote&format=jsonp&lang=en&jsonp=?",
+		    dataType: 'jsonp',
+		    success: callback
+		  });
+		}  	
+	</script>
+</body>
+</html>
