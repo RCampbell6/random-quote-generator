@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  background: url("https://dl.dropboxusercontent.com/s/83hnadg6a5by2px/the-sea.jpg?dl=0") no-repeat center center fixed;
+  background: url("images/the-sea.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
